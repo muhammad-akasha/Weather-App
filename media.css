@@ -1,0 +1,56 @@
+@media (max-width:992px){
+  .px-3 {
+   padding: 5px 0px!important;
+}
+.navbar-nav {
+  gap: 5px;
+}
+}
+@media (max-width: 600px) {
+  .container-fluid {
+    padding: 20px 20px;
+  }
+  .navbar-brand {
+    font-size: 17px;
+    font-weight: 600;
+  }
+  #cityBtn {
+    font-size: 13px;
+    padding: 2px 5px;
+    font-weight: 600;
+  }
+  .weather-container {
+    width: 100%;
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 30px 15px;
+  }
+  .child-two {
+    width: 250px;
+    margin: 0px auto 50px auto;
+  }
+  .child-one {
+    margin: auto;
+  }
+  .d-flex {
+    width: 90%;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 700px) {
+  h1 {
+    font-size: 30px;
+  }
+  h2 {
+    font-size: 23px;
+  }
+  h3 {
+    font-size: 25px;
+  }
+  .weather-container {
+    width: 580px;
+  }
+  .child-one {
+    width: 270px !important;
+  }
+}
