@@ -33,7 +33,7 @@ cityBtn.addEventListener("click", () => {
 function showWeatherByCity(city) {
   let capiCityName = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
   fetch(
-    `http://api.openweathermap.org/data/2.5/weather?q=${capiCityName}&APPID=8fc39c8c9f8d64a0e4c6a57d68ba1caa`
+    `https://api.openweathermap.org/data/2.5/weather?q=${capiCityName}&APPID=8fc39c8c9f8d64a0e4c6a57d68ba1caa`
   )
     .then((res) => {
       return res.json(); // You need to return the promise from res.json() here
@@ -86,7 +86,7 @@ function showWeatherByCity(city) {
 function showWeatherByDropdown(city) {
   let capiCityName = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
   fetch(
-    `http://api.openweathermap.org/data/2.5/weather?q=${capiCityName}&APPID=8fc39c8c9f8d64a0e4c6a57d68ba1caa`
+    `https://api.openweathermap.org/data/2.5/weather?q=${capiCityName},PK&APPID=8fc39c8c9f8d64a0e4c6a57d68ba1caa`
   )
     .then((res) => {
       return res.json(); // You need to return the promise from res.json() here
