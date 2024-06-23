@@ -10,7 +10,9 @@ body {
   min-height: 100vh;
 }
 body {
-  background: #ff640a;
+  /* background: #ff640a; */
+  background-image: url(./images/wallpaper.jpg);
+  background-size: cover;
 }
 h2,
 h1,
@@ -25,7 +27,7 @@ h3 {
   background: #000;
 }
 .navbar-brand {
-  color: #fff;
+  color: #fff !important;
   font-size: 23px;
 }
 .nav-link,
@@ -68,16 +70,26 @@ h3 {
   bottom: 0px;
 }
 .relative {
-  position: relative!important;
+  position: relative !important;
 }
 .weather-box {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin: 100px auto;
   border-radius: 30px;
+  padding: 60px 30px;
+  width: fit-content;
+  /* box-shadow: rgba(0, 0, 0, 0.534) 0px 25px 50px -12px; */
+  /* box-shadow: -6px -4px 24px hsl(220deg 60% 50% / 20%),
+    2px 4px 4px hsl(220deg 60% 50% / 20%), 4px 8px 8px hsl(220deg 60% 50% / 20%),
+    8px 16px 16px hsl(220deg 60% 50% / 20%),
+    16px 32px 32px hsl(220deg 60% 50% / 20%); */
 }
 .weather-box h3 {
   text-align: center;
+  color: #f3f3f3;
 }
 .weather-container {
   display: flex;
@@ -87,13 +99,37 @@ h3 {
   height: fit-content;
   background: #ff4000;
   color: #ffffff;
-  padding: 60px 30px;
   border-radius: 30px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  /* box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px; */
+}
+.child-two {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .weather-container i {
   font-size: 200px;
   color: #f3f3f3;
+}
+.forecast-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #fff;
+  margin-top: 20px;
+}
+
+.forecast-container div {
+  border: 2px solid black;
+  width: 120px;
+}
+
+.forecast-container i {
+  font-size: 50px;
+}
+.forecast-day h3 {
+  font-size: 20px;
 }
 
 .form-nav {
