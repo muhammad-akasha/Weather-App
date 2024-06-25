@@ -44,6 +44,7 @@ function showWeatherByCity(city) {
 
   Promise.all(urls.map((url) => fetch(url).then((res) => res.json())))
     .then((data) => {
+      console.log(data)
       let weatherContainer = document.createElement("div");
       let forecastContainer = document.createElement("div");
       forecastContainer.classList.add("forecast-container");
@@ -53,10 +54,11 @@ function showWeatherByCity(city) {
       if (weatherData.cod === 200 && forecast.cod === "200") {
         const {
           name,
+          wind : {speed},
           main: { temp, feels_like },
           sys: { country, sunrise, sunset }, weather : [{description : descrip , icon}]
         } = weatherData;  // get data by using destructuring for better readibility.
-        let sunRiseSunSet = sunRiseandSetTime(sunrise, sunset);
+        // let sunRiseSunSet = sunRiseandSetTime(sunrise, sunset);
         let currTemp = tempConvertor(temp);
         let realFeel = tempConvertor(feels_like);
         let weatherImage = weatherIcon(descrip, icon);
@@ -69,8 +71,7 @@ function showWeatherByCity(city) {
               <h2>Temperature: <strong style="font-size:40px; color:azure">${currTemp}</strong></h2>
               <h2>Feels Like: ${realFeel}</h2>
               <h2>${descrip} <img src="http://openweathermap.org/img/wn/${icon}.png" alt="${descrip}"></h2>
-              <h2>Sunrise: ${sunRiseSunSet.sunRise}</h2>
-              <h2>Sunset: ${sunRiseSunSet.sunSet}</h2>
+              <h2>Wind Speed : <i class="fa-solid fa-wind"></i> ${speed}</h2>
             </div>
             <div class="child-two" style="width:250px">${weatherImage}</div>
           </div>
@@ -138,7 +139,7 @@ function showWeatherByDropdown(city) {
           main: { temp, feels_like },
           sys: { country, sunrise, sunset }, weather : [{description : descrip , icon}]
         } = weatherData;
-        let sunRiseSunSet = sunRiseandSetTime(sunrise, sunset);
+        // let sunRiseSunSet = sunRiseandSetTime(sunrise, sunset);
         let currTemp = tempConvertor(temp);
         let realFeel = tempConvertor(feels_like);
         let weatherImage = weatherIcon(descrip, icon);
@@ -151,8 +152,7 @@ function showWeatherByDropdown(city) {
               <h2>Temperature: <strong style="font-size:40px; color:azure">${currTemp}</strong></h2>
               <h2>Feels Like: ${realFeel}</h2>
               <h2>${descrip} <img src="http://openweathermap.org/img/wn/${icon}.png" alt="${descrip}"></h2>
-              <h2>Sunrise: ${sunRiseSunSet.sunRise}</h2>
-              <h2>Sunset: ${sunRiseSunSet.sunSet}</h2>
+              <h2>Wind Speed: <i class="fa-solid fa-wind"></i> ${speed}</h2>
             </div>
             <div class="child-two" style="width:250px">${weatherImage}</div>
           </div>
