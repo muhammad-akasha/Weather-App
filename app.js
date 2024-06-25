@@ -16,22 +16,25 @@ searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
 });
 let cityName;
-getCity.addEventListener("change", (e) => {  // Triggered when the value in the input field changes
-  if (e.target.value === "") {  // Check if the input is empty
+getCity.addEventListener("change", (e) => {
+  // Triggered when the value in the input field changes
+  if (e.target.value === "") {
+    // Check if the input is empty
     alert("Please enter a city name");
   } else {
     cityName = e.target.value.trim(); // Trim whitespace from the input
   }
 });
 
-cityBtn.addEventListener("click", () => {  // Triggered when the button is clicked
-  if (!cityName) {  // Check if cityName is empty
+cityBtn.addEventListener("click", () => {
+  // Triggered when the button is clicked
+  if (!cityName) {
+    // Check if cityName is empty
     alert("Please enter a city name");
   } else {
-    showWeatherByCity(cityName);  // Call function to show weather by city name
+    showWeatherByCity(cityName); // Call function to show weather by city name
   }
 });
-
 
 // function for get value from input and show those city weather.
 
@@ -44,7 +47,6 @@ function showWeatherByCity(city) {
 
   Promise.all(urls.map((url) => fetch(url).then((res) => res.json())))
     .then((data) => {
-      console.log(data)
       let weatherContainer = document.createElement("div");
       let forecastContainer = document.createElement("div");
       forecastContainer.classList.add("forecast-container");
@@ -54,22 +56,22 @@ function showWeatherByCity(city) {
       if (weatherData.cod === 200 && forecast.cod === "200") {
         const {
           name,
-          wind : {speed},
+          wind: { speed },
           main: { temp, feels_like },
-          sys: { country, sunrise, sunset }, weather : [{description : descrip , icon}]
-        } = weatherData;  // get data by using destructuring for better readibility.
+          sys: { country, sunrise, sunset },
+          weather: [{ description: descrip, icon }],
+        } = weatherData; // get data by using destructuring for better readibility.
         // let sunRiseSunSet = sunRiseandSetTime(sunrise, sunset);
         let currTemp = tempConvertor(temp);
         let realFeel = tempConvertor(feels_like);
-        let weatherImage = weatherIcon(descrip, icon);
-
+        let weatherImage = weatherIcon(descrip, icon,currTemp);
         let weatherHtml = `
           <div><h3> Date: ${currDate().date} Time: ${currDate().time}</h3></div>
           <div class="weather-container">
             <div class="child-one" style="width:330px">
               <h1>${name}, ${country}</h1>
-              <h2>Temperature: <strong style="font-size:40px; color:azure">${currTemp}</strong></h2>
-              <h2>Feels Like: ${realFeel}</h2>
+              <h2>Temperature: <strong style="font-size:40px; color:azure">${currTemp}\xB0C</strong></h2>
+              <h2>Feels Like: ${realFeel}\xB0C</h2>
               <h2>${descrip} <img src="http://openweathermap.org/img/wn/${icon}.png" alt="${descrip}"></h2>
               <h2>Wind Speed : <i class="fa-solid fa-wind"></i> ${speed}</h2>
             </div>
@@ -84,7 +86,7 @@ function showWeatherByCity(city) {
           let fourDayTemp = forecastItem.main.temp;
           let fourDayDescrip = forecastItem.weather[0].description;
           let fourDayIcon = forecastItem.weather[0].icon;
-          let fourDayAllIcons = weatherIcon(fourDayDescrip, fourDayIcon);
+          let fourDayAllIcons = weatherIcon(fourDayDescrip, fourDayIcon,fourDayTemp);
 
           // Create a new div for each day's forecast
           const dayDiv = document.createElement("div");
@@ -107,7 +109,7 @@ function showWeatherByCity(city) {
         weatherBox.appendChild(weatherContainer);
 
         footerPositioning();
-        dayAndNightEffects()
+        dayAndNightEffects();
       } else {
         weatherBox.innerHTML = `City not found: ${data.message}`;
       }
@@ -133,24 +135,26 @@ function showWeatherByDropdown(city) {
       let weatherData = data[0];
       let forecast = data[1];
 
-      if (weatherData.cod === 200 && forecast.cod === "200") {  // check that is both found or not
+      if (weatherData.cod === 200 && forecast.cod === "200") {
+        // check that is both found or not
         const {
           name,
+          wind: { speed },
           main: { temp, feels_like },
-          sys: { country, sunrise, sunset }, weather : [{description : descrip , icon}]
+          sys: { country, sunrise, sunset },
+          weather: [{ description: descrip, icon }],
         } = weatherData;
         // let sunRiseSunSet = sunRiseandSetTime(sunrise, sunset);
         let currTemp = tempConvertor(temp);
         let realFeel = tempConvertor(feels_like);
-        let weatherImage = weatherIcon(descrip, icon);
-
+        let weatherImage = weatherIcon(descrip, icon,currTemp);
         let weatherHtml = `
           <div><h3> Date: ${currDate().date} Time: ${currDate().time}</h3></div>
           <div class="weather-container">
             <div class="child-one" style="width:330px">
               <h1>${name}, ${country}</h1>
-              <h2>Temperature: <strong style="font-size:40px; color:azure">${currTemp}</strong></h2>
-              <h2>Feels Like: ${realFeel}</h2>
+              <h2>Temperature: <strong style="font-size:40px; color:azure">${currTemp}\xB0C</strong></h2>
+              <h2>Feels Like: ${realFeel}\xB0C</h2>
               <h2>${descrip} <img src="http://openweathermap.org/img/wn/${icon}.png" alt="${descrip}"></h2>
               <h2>Wind Speed: <i class="fa-solid fa-wind"></i> ${speed}</h2>
             </div>
@@ -165,7 +169,7 @@ function showWeatherByDropdown(city) {
           let fourDayTemp = forecastItem.main.temp;
           let fourDayDescrip = forecastItem.weather[0].description;
           let fourDayIcon = forecastItem.weather[0].icon;
-          let fourDayAllIcons = weatherIcon(fourDayDescrip, fourDayIcon);
+          let fourDayAllIcons = weatherIcon(fourDayDescrip, fourDayIcon,fourDayTemp);
 
           // Create a new div for each day's forecast
           const dayDiv = document.createElement("div");
@@ -188,7 +192,7 @@ function showWeatherByDropdown(city) {
         weatherBox.appendChild(weatherContainer);
 
         footerPositioning();
-        dayAndNightEffects()
+        dayAndNightEffects();
       } else {
         weatherBox.innerHTML = `City not found: ${data.message}`;
       }
@@ -204,7 +208,7 @@ function showWeatherByDropdown(city) {
 function tempConvertor(temp) {
   let tempCelcius = temp - 273.15;
   tempCelcius = Math.round(tempCelcius.toFixed(2));
-  return tempCelcius + "\xB0C";
+  return tempCelcius;
 }
 
 // function for get sunrise sunset time.
@@ -220,7 +224,8 @@ function sunRiseandSetTime(sunrise, sunset) {
 }
 
 function currDate() {
-  const months = [  // month array
+  const months = [
+    // month array
     "January",
     "February",
     "March",
@@ -256,8 +261,10 @@ function currDate() {
   };
 }
 
-function weatherIcon(description, icon) {
-  if (
+function weatherIcon(description, icon,temp) {
+  if (temp > "40") {
+    return ` <i class="fa-solid fa-temperature-high"></i>`;
+  } else if (
     description === "fog" ||
     description === "haze" ||
     description === "dust" ||
@@ -330,12 +337,13 @@ function footerPositioning() {
 }
 
 // add a day night image change function
- 
+
 function dayAndNightEffects() {
   let weatherContainer = document.querySelector(".weather-container");
   weatherContainer.style.backgroundColor = "transparent";
   weatherBox.style.border = "2px solid #f3f3f3";
-  weatherBox.style.boxShadow = "rgb(18 2 255 / 20%) -6px -4px 24px, rgb(255 27 27 / 20%) 2px 4px 4px, rgb(173 133 133 / 20%) 4px 8px 8px, rgb(255 220 220 / 20%) 8px 16px 16px, rgb(0 0 0 / 20%) 16px 32px 32px"
+  weatherBox.style.boxShadow =
+    "rgb(18 2 255 / 20%) -6px -4px 24px, rgb(255 27 27 / 20%) 2px 4px 4px, rgb(173 133 133 / 20%) 4px 8px 8px, rgb(255 220 220 / 20%) 8px 16px 16px, rgb(0 0 0 / 20%) 16px 32px 32px";
   let hour = new Date().getHours();
   let isDayOrNight = hour >= 5 && hour <= 19;
   document.body.style.backgroundImage = isDayOrNight
@@ -343,5 +351,4 @@ function dayAndNightEffects() {
     : "url('./images/night.jpg')";
   document.body.style.backgroundSize = "cover";
   document.body.style.backgroundPosition = "center";
-
 }
