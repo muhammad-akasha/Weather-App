@@ -10,7 +10,6 @@ body {
   min-height: 100vh;
 }
 body {
-  /* background: #ff640a; */
   background-image: url(./images/wallpaper.jpg);
   background-size: cover;
 }
@@ -47,6 +46,7 @@ h3 {
 .navbar-toggler-icon {
   color: #000;
 }
+
 .fa-magnifying-glass {
   color: #fff;
   cursor: pointer;

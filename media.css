@@ -5,6 +5,30 @@
   .navbar-nav {
     gap: 5px;
   }
+  .ms-auto {
+    margin-left: 0!important;
+}
+.navbar-collapse.show {
+  left: 0;
+}
+.navbar-collapse {
+  position: fixed;
+  top: 20px;
+  left: -380px;
+  width: 380px;
+  height: 100%;
+  display: flex;
+  background-color: #000;
+  color: #fff;
+  transition: all 0.3s ease;
+  z-index: 1;
+  color: #000;
+  padding: 0 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 52px 20px;
+  flex-direction: column;
+}
 }
 @media (max-width: 599px) {
   .container-fluid {
@@ -13,6 +37,10 @@
   .navbar-brand {
     font-size: 17px;
     font-weight: 600;
+  }
+  .navbar-collapse {
+    left: -45%;
+    width: 45%;
   }
   #cityBtn {
     font-size: 13px;
@@ -59,5 +87,9 @@
   }
   .child-one {
     width: 280px !important;
+  }
+  .navbar-collapse {
+    left: -42%;
+    width: 42%;
   }
 }
